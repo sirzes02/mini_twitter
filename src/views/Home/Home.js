@@ -47,8 +47,12 @@ const Weeks = () => {
     setAvatar(user._data.avatar);
     setName(user._data.nombre);
 
-    const aux = await firestore().collection('tweets').get();
-    setTweets(aux.docs.reverse());
+    const aux = await firestore()
+      .collection('tweets')
+      .orderBy('fecha', 'desc')
+      .get();
+
+    setTweets(aux.docs);
   };
 
   const LogOut = async () =>

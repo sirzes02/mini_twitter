@@ -70,7 +70,7 @@ const Tweet = ({ vista, data }) => {
             </LinearGradient>
           </TouchableHighlight>
           <Text style={vista === 'perfil' ? styles.fecha2 : styles.fecha}>
-            {data._data.fecha}
+            {data.data().fecha.toDate().toLocaleString()}
           </Text>
         </View>
       ) : (

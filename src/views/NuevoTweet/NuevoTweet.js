@@ -43,7 +43,7 @@ const NuevoTweet = () => {
     firestore()
       .collection('tweets')
       .add({
-        fecha: 'preuba',
+        fecha: firebase.firestore.FieldValue.serverTimestamp(),
         id: token.uid,
         texto: tweet,
       })
