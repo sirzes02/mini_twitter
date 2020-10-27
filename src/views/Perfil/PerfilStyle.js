@@ -9,7 +9,7 @@ const styles = StyleSheet.create({
     width: 60,
   },
   nombre: {
-    fontSize: 20,
+    fontSize: 25,
   },
   descripcion: {
     textAlign: 'left',
@@ -18,7 +18,6 @@ const styles = StyleSheet.create({
     display: 'flex',
     marginBottom: 10,
     flexDirection: 'row',
-    justifyContent: 'space-between',
   },
   editar: { marginLeft: 10 },
   scroll: {
@@ -56,6 +55,13 @@ const styles = StyleSheet.create({
     left: 15,
   },
   espaciado: { marginTop: 25 },
+  containerInformation: {
+    marginLeft: 10,
+    display: 'flex',
+    flex: 1,
+    marginBottom: 10,
+    flexDirection: 'column',
+  },
 });
 
 export default styles;

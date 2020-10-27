@@ -65,6 +65,7 @@ const Register = ({ navigation }) => {
         value={correo}
         placeholder="Correo"
         maxLength={200}
+        autoCapitalize="none"
       />
       {Errorcontrasenia ? (
         <Text style={styles.textError}>

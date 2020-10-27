@@ -48,6 +48,7 @@ const Login = ({ navigation }) => {
         value={correo}
         placeholder="Correo"
         maxLength={200}
+        autoCapitalize="none"
       />
       <TextInput
         style={styles.inputText}
@@ -56,7 +57,6 @@ const Login = ({ navigation }) => {
         secureTextEntry={true}
         placeholder="contraseña"
         maxLength={200}
-        autoCapitalize={false}
       />
       {loading ? (
         <ActivityIndicator size="large" color="#32CF5E" />

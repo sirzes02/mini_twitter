@@ -120,8 +120,8 @@ const Tweet = ({ vista, data, func, actions, navegation }) => {
                 onPress={() =>
                   navigation.navigate('EditarTweet', {
                     data: data.data().texto,
-                    id: id,
-                    func: func,
+                    id,
+                    func,
                   })
                 }>
                 <Icons
