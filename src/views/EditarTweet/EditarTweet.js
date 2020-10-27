@@ -1,29 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import {
   ActivityIndicator,
-  Alert,
   Text,
-  TextInput,
-  TouchableHighlight,
   View,
+  TouchableHighlight,
+  Alert,
 } from 'react-native';
-import firebase from '@react-native-firebase/app';
+import { TextInput } from 'react-native-gesture-handler';
+import styles from './EditarTweetStyle';
 import firestore from '@react-native-firebase/firestore';
-import styles from './EditarStyles';
 
-const Editar = ({ route, navigation }) => {
-  const LIMIT = 255;
+const NuevoTweet = ({ route, navigation }) => {
+  const LIMIT = 115;
   const [cantCaracteres, setCantidadCaracteres] = useState(0);
-  const [descripcion, setDescripcion] = useState('');
-  const [nombre, setNombre] = useState();
-  const [correo, setCorreo] = useState();
+  const [errorTweet, setErrorTweet] = useState(false);
+  const [tweet, setTweet] = useState(route.params.data);
   const [cargando, setCargando] = useState(false);
   const [enviado, setEnviado] = useState(false);
-
-  useEffect(() => {
-    cargar();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   useEffect(
     () =>
@@ -33,7 +26,7 @@ const Editar = ({ route, navigation }) => {
         if (!enviado) {
           Alert.alert(
             'Regresar',
-            '¿Estás seguro de que quieres regresar?',
+            '¿Estás seguro de que quieres regresar? se borrará el cambio.',
             [
               {
                 text: 'Cancelar',
@@ -58,85 +51,79 @@ const Editar = ({ route, navigation }) => {
 
   const handleChanges = (e) => {
     if (cantCaracteres < LIMIT - 1) {
-      setDescripcion(e);
+      setTweet(e);
       setCantidadCaracteres(e.length);
     }
   };
 
-  const cargar = () => {
-    const token = firebase.auth().currentUser;
-
-    setNombre(route.params.name);
-    setCorreo(token.email);
+  const limpiar = () => {
+    setTweet('');
+    setCantidadCaracteres(0);
+    setErrorTweet(false);
   };
 
   const Validacion = async () => {
     if (cantCaracteres === 0) {
+      setErrorTweet(true);
       return;
     }
-
     setCargando(true);
 
-    const token = firebase.auth().currentUser;
-
-    firestore()
-      .collection('users')
-      .doc(token.uid)
-      .update({
-        descripcion: descripcion,
-      })
+    await firestore()
+      .collection('tweets')
+      .doc(route.params.id)
+      .update({ texto: tweet })
       .then(() => {
         setEnviado(true);
+        Alert.alert('Actualización', 'Tweet actualizado con exito');
+        setEnviado(true);
         navigation.goBack();
+        route.params.func();
       });
+
     setCargando(false);
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.text_Header}>Actualiza tus datos</Text>
-      <TextInput
-        style={styles.inputText}
-        placeholder="Nombre"
-        maxLength={200}
-        value={nombre}
-        editable={false}
-      />
-      <TextInput
-        style={styles.inputText}
-        placeholder="Correo"
-        value={correo}
-        maxLength={200}
-        editable={false}
-      />
-      <Text>Descripción</Text>
+      <Text style={styles.text_Header}>Editar tweet</Text>
+
+      {errorTweet ? (
+        <Text style={styles.textError}>
+          Te queremos, no nos dejes en blanco...
+        </Text>
+      ) : null}
+
       <TextInput
         style={styles.text_area}
-        placeholder="Comentanos que eres..."
-        value={descripcion}
+        placeholder="Escriba su experiencia!"
         onChangeText={handleChanges}
+        value={tweet}
         multiline={true}
         numberOfLines={7}
       />
-      <Text style={styles.caracteres}>
+      <Text style={styles.characteres}>
         {cantCaracteres}/{LIMIT}
       </Text>
 
       {!cargando ? (
         <>
-          <View style={styles.buttonContainer}>
+          <View style={styles.contenedorBotonNuevo}>
             <TouchableHighlight
               underlayColor="#32CF5E"
-              onPress={Validacion}
-              style={styles.button}>
-              <Text style={styles.textbutton}>Actualizar</Text>
+              style={styles.buttonNuevo}
+              onPress={Validacion}>
+              <Text style={styles.textButton}>Finalizar</Text>
             </TouchableHighlight>
           </View>
-          <TouchableHighlight
-            underlayColor="rgba(0,0,0,0.0)"
-            onPress={() => navigation.goBack()}>
-            <Text>Cancelar</Text>
-          </TouchableHighlight>
+          <View style={styles.contenedorBotonBorrar}>
+            <TouchableHighlight
+              underlayColor="#C65656"
+              style={styles.buttonLimpiar}
+              onPress={limpiar}>
+              <Text style={styles.textButton}>Limpiar</Text>
+            </TouchableHighlight>
+          </View>
         </>
       ) : (
         <ActivityIndicator size="large" color="#32CF5E" />
@@ -145,4 +132,4 @@ const Editar = ({ route, navigation }) => {
   );
 };
 
-export default Editar;
+export default NuevoTweet;

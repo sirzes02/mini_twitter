@@ -28,7 +28,12 @@ const styles = StyleSheet.create({
   container: { marginTop: 0, marginBottom: 0 },
   nombre: { marginBottom: 5 },
   fecha: { textAlign: 'right' },
-  fecha2: { textAlign: 'right', marginBottom: 10 },
+  containerActions: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom: 20,
+  },
 });
 
 export default styles;

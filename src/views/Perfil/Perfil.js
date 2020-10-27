@@ -67,18 +67,19 @@ const Perfil = ({ navigation }) => {
             <Text style={styles.nombre}>{name}</Text>
             <Text style={styles.descripcion}>{description}</Text>
           </View>
-          <TouchableHighlight underlayColor="transparent">
+          <TouchableHighlight
+            underlayColor="transparent"
+            onPress={() =>
+              navigation.navigate('Edicion', {
+                descripcion: description,
+                name,
+              })
+            }>
             <Icons
               style={styles.editar}
               name="edit"
               size={35}
               color="#F9DD7C"
-              onPress={() =>
-                navigation.navigate('Edicion', {
-                  descripcion: description,
-                  name,
-                })
-              }
             />
           </TouchableHighlight>
         </View>
@@ -90,7 +91,12 @@ const Perfil = ({ navigation }) => {
             {tweets.length > 0 ? (
               <ScrollView style={styles.scroll}>
                 {tweets.map((tweet) => (
-                  <Tweet data={tweet} />
+                  <Tweet
+                    data={tweet}
+                    func={DatosToken}
+                    actions={true}
+                    key={tweet._ref._documentPath._parts[1]}
+                  />
                 ))}
               </ScrollView>
             ) : (

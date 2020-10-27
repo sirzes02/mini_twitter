@@ -36,7 +36,7 @@ const Indexador = () => {
         }}
       />
       <Tab.Screen
-        name="Ranking"
+        name="Nuevo"
         component={NuevoTweet}
         options={{
           tabBarLabel: 'Tweetear',

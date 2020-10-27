@@ -5,13 +5,15 @@ import {
   TouchableHighlight,
   ActivityIndicator,
   Image,
+  Alert,
 } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
+import Icons from 'react-native-vector-icons/FontAwesome';
 import firestore from '@react-native-firebase/firestore';
 import styles from './TweetStyle';
 
-const Tweet = ({ vista, data }) => {
+const Tweet = ({ vista, data, func, actions, navegation }) => {
   const [cargando, setCargando] = useState(true);
   const [nombre, setNombre] = useState('');
   const [avatar, setAvatar] = useState('');
@@ -56,6 +58,34 @@ const Tweet = ({ vista, data }) => {
     setId(data._ref._documentPath._parts[1]);
   };
 
+  const remove = async () => {
+    Alert.alert(
+      'Regresar',
+      '¿Estás seguro de que deseas eliminar el tweet?',
+      [
+        {
+          text: 'Cancelar',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {
+          text: 'Eliminar',
+          onPress: async () => {
+            await firestore()
+              .collection('tweets')
+              .doc(id)
+              .delete()
+              .then(() => {
+                Alert.alert('Borrado', 'Tweet borrado con exito');
+                func();
+              });
+          },
+        },
+      ],
+      { cancelable: false },
+    );
+  };
+
   return (
     <View style={styles.container}>
       {!cargando ? (
@@ -82,7 +112,35 @@ const Tweet = ({ vista, data }) => {
               <Text style={styles.tituloSemana}> {data.data().texto}</Text>
             </LinearGradient>
           </TouchableHighlight>
-          <Text style={vista ? styles.fecha : styles.fecha2}>{fecha}</Text>
+          <Text style={styles.fecha}>{fecha}</Text>
+          {actions && (
+            <View style={styles.containerActions}>
+              <TouchableHighlight
+                underlayColor="transparent"
+                onPress={() =>
+                  navigation.navigate('EditarTweet', {
+                    data: data.data().texto,
+                    id: id,
+                    func: func,
+                  })
+                }>
+                <Icons
+                  style={styles.editar}
+                  name="edit"
+                  size={35}
+                  color="black"
+                />
+              </TouchableHighlight>
+              <TouchableHighlight underlayColor="transparent" onPress={remove}>
+                <Icons
+                  style={styles.editar}
+                  name="remove"
+                  size={35}
+                  color="red"
+                />
+              </TouchableHighlight>
+            </View>
+          )}
         </View>
       ) : (
         <ActivityIndicator size="large" color="#32CF5E" />
