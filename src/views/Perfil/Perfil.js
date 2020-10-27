@@ -72,7 +72,12 @@ const Perfil = ({ navigation }) => {
               name="edit"
               size={35}
               color="#F9DD7C"
-              onPress={() => navigation.navigate('Edicion')}
+              onPress={() =>
+                navigation.navigate('Edicion', {
+                  descripcion: description,
+                  name,
+                })
+              }
             />
           </TouchableHighlight>
         </View>
