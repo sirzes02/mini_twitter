@@ -132,6 +132,14 @@ const Editar = ({ route, navigation }) => {
               <Text style={styles.textbutton}>Actualizar</Text>
             </TouchableHighlight>
           </View>
+          <View style={styles.buttonContainer}>
+            <TouchableHighlight
+              underlayColor="#32CF5E"
+              onPress={() => navigation.navigate('EditarAvatar')}
+              style={styles.buttonAvatares}>
+              <Text style={styles.textbutton}>Editar Foto</Text>
+            </TouchableHighlight>
+          </View>
           <TouchableHighlight
             underlayColor="rgba(0,0,0,0.0)"
             onPress={() => navigation.goBack()}>

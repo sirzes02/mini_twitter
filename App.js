@@ -11,6 +11,7 @@ import Indexador from './src/views/Indexador';
 import Editar from './src/views/Editar/Editar';
 import TweetIndividual from './src/views/TweetIndividual/TweetIndividual';
 import EditarTweet from './src/views/EditarTweet/EditarTweet';
+import EditarAvatar from './src/views/EditarAvatar/EditarAvatar';
 
 const App = () => {
   const [initializing, setInitializing] = useState(true);
@@ -25,6 +26,7 @@ const App = () => {
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (initializing) return null;
@@ -78,6 +80,11 @@ const App = () => {
           <Stack.Screen
             name="EditarTweet"
             component={EditarTweet}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="EditarAvatar"
+            component={EditarAvatar}
             options={{ headerShown: false }}
           />
         </Stack.Navigator>
