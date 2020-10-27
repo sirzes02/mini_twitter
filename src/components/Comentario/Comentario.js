@@ -13,8 +13,8 @@ import styles from './ComentarioStyle';
 const Tweet = ({ data }) => {
   const [cargando, setCargando] = useState(true);
   const [nombre, setNombre] = useState('');
-  const [avatar, setAvatar] = useState(2);
-  const [fecha, setFecha] = useState('');
+  const [avatar, setAvatar] = useState(0);
+  const [fecha, setFecha] = useState('-');
   const [comentario, setComentario] = useState();
 
   const Avatars = [

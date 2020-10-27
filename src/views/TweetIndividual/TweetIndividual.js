@@ -100,7 +100,10 @@ const TweetIndividual = ({ route }) => {
       <View style={styles.lineDown} />
       <ScrollView style={styles.scrollContainer}>
         {comentarios.map((comentario) => (
-          <Comentario data={comentario} />
+          <Comentario
+            data={comentario}
+            key={comentario._ref._documentPath._parts[1]}
+          />
         ))}
         <View style={styles.espaciado} />
       </ScrollView>

@@ -97,7 +97,11 @@ const Weeks = () => {
       ) : (
         <ScrollView style={styles.scroll}>
           {tweets.map((tweet) => (
-            <Tweet data={tweet} vista={true} />
+            <Tweet
+              data={tweet}
+              vista={true}
+              key={tweet._ref._documentPath._parts[1]}
+            />
           ))}
         </ScrollView>
       )}
