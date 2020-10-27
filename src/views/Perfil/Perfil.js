@@ -7,7 +7,7 @@ import {
   TouchableHighlight,
   View,
 } from 'react-native';
-import Ionicons from 'react-native-vector-icons/FontAwesome';
+import Icons from 'react-native-vector-icons/FontAwesome';
 import firestore from '@react-native-firebase/firestore';
 import firebase from '@react-native-firebase/app';
 import styles from './PerfilStyle';
@@ -52,9 +52,9 @@ const Perfil = ({ navigation }) => {
       .where('id', '==', token.uid)
       .get();
 
-    setAvatar(user._data.avatar);
-    setName(user._data.nombre);
-    setDescription(user._data.descripcion);
+    setAvatar(user.data().avatar);
+    setName(user.data().nombre);
+    setDescription(user.data().descripcion);
     setTweets(aux.docs);
   };
 
@@ -68,7 +68,7 @@ const Perfil = ({ navigation }) => {
             <Text style={styles.descripcion}>{description}</Text>
           </View>
           <TouchableHighlight underlayColor="transparent">
-            <Ionicons
+            <Icons
               style={styles.editar}
               name="edit"
               size={35}
@@ -83,12 +83,13 @@ const Perfil = ({ navigation }) => {
           </TouchableHighlight>
         </View>
         <Text style={styles.sub}>Tus Tweets</Text>
+
         {!cargando ? (
           <>
             {tweets.length > 0 ? (
               <ScrollView style={styles.scroll}>
                 {tweets.map((tweet) => (
-                  <Tweet data={tweet} vista="perfil" />
+                  <Tweet data={tweet} />
                 ))}
               </ScrollView>
             ) : (
@@ -103,7 +104,7 @@ const Perfil = ({ navigation }) => {
       </View>
       <View style={styles.refresh}>
         <TouchableHighlight underlayColor="transparent" onPress={DatosToken}>
-          <Ionicons name="refresh" size={30} color="black" />
+          <Icons name="refresh" size={30} color="black" />
         </TouchableHighlight>
       </View>
     </View>

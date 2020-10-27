@@ -26,7 +26,7 @@ const styles = StyleSheet.create({
     width: '100%',
     borderRadius: 5,
   },
-  buttonRegistro: {
+  buttonNuevo: {
     height: '100%',
     width: '100%',
     alignItems: 'center',
@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 2,
   },
-  textbuttonRegistro: {
+  textButton: {
     fontWeight: 'bold',
     color: 'black',
   },
@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     width: '100%',
   },
-  caracteres: { fontSize: 10 },
+  characteres: { fontSize: 10 },
 });
 
 export default styles;

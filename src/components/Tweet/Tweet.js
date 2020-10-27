@@ -15,6 +15,7 @@ const Tweet = ({ vista, data }) => {
   const [cargando, setCargando] = useState(true);
   const [nombre, setNombre] = useState('');
   const [avatar, setAvatar] = useState('');
+  const [fecha, setFecha] = useState('');
 
   const navigation = useNavigation();
 
@@ -43,20 +44,21 @@ const Tweet = ({ vista, data }) => {
 
   useEffect(() => {
     setCargando(false);
-  }, [avatar]);
+  }, [fecha]);
 
   const DatosToken = async () => {
-    const aux = await firestore().collection('users').doc(data._data.id).get();
+    const aux = await firestore().collection('users').doc(data.data().id).get();
 
-    setNombre(aux._data.nombre);
-    setAvatar(aux._data.avatar);
+    setNombre(aux.data().nombre);
+    setAvatar(aux.data().avatar);
+    setFecha(data.data().fecha.toDate().toLocaleString());
   };
 
   return (
     <View style={styles.container}>
       {!cargando ? (
         <View>
-          {vista === 'home' && <Text style={styles.nombre}>{nombre}</Text>}
+          {vista && <Text style={styles.nombre}>{nombre}</Text>}
           <TouchableHighlight
             underlayColor="transparent"
             onPress={() =>
@@ -67,15 +69,13 @@ const Tweet = ({ vista, data }) => {
               start={{ x: 0, y: 0 }}
               end={{ x: 0.9, y: 0.9 }}
               style={styles.semana}>
-              {vista === 'home' && (
+              {vista && (
                 <Image style={styles.imgProfile} source={Avatars[avatar - 1]} />
               )}
-              <Text style={styles.tituloSemana}> {data._data.texto}</Text>
+              <Text style={styles.tituloSemana}> {data.data().texto}</Text>
             </LinearGradient>
           </TouchableHighlight>
-          <Text style={vista === 'perfil' ? styles.fecha2 : styles.fecha}>
-            {data.data().fecha.toDate().toLocaleString()}
-          </Text>
+          <Text style={vista ? styles.fecha : styles.fecha2}>{fecha}</Text>
         </View>
       ) : (
         <ActivityIndicator size="large" color="#32CF5E" />

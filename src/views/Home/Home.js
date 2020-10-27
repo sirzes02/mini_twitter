@@ -6,9 +6,10 @@ import {
   TouchableHighlight,
   Alert,
   ScrollView,
+  ActivityIndicator,
 } from 'react-native';
 import styles from './HomeStyles';
-import Ionicons from 'react-native-vector-icons/FontAwesome';
+import Icons from 'react-native-vector-icons/FontAwesome';
 import auth from '@react-native-firebase/auth';
 import firestore from '@react-native-firebase/firestore';
 import firebase from '@react-native-firebase/app';
@@ -18,7 +19,7 @@ const Weeks = () => {
   const [name, setName] = useState('');
   const [avatar, setAvatar] = useState(0);
   const [tweets, setTweets] = useState([]);
-  const [cargando, setCargando] = useState(true);
+  const [loadig, setLoadig] = useState(true);
 
   const Avatars = [
     require('../../assets/avatars/a1.png'),
@@ -36,16 +37,16 @@ const Weeks = () => {
   }, []);
 
   useEffect(() => {
-    setCargando(false);
+    setLoadig(false);
   }, [tweets]);
 
   const DatosToken = async () => {
     setTweets([]);
-    setCargando(false);
+    setLoadig(false);
     const token = firebase.auth().currentUser;
     const user = await firestore().collection('users').doc(token.uid).get();
-    setAvatar(user._data.avatar);
-    setName(user._data.nombre);
+    setAvatar(user.data().avatar);
+    setName(user.data().nombre);
 
     const aux = await firestore()
       .collection('tweets')
@@ -62,15 +63,13 @@ const Weeks = () => {
       [
         {
           text: 'Cancelar',
-          onPress: () => console.log('Cancel Pressed'),
+          onPress: () => {},
           style: 'cancel',
         },
         {
           text: 'Cerrar sesión',
           onPress: async () => {
-            auth()
-              .signOut()
-              .then(() => console.log('User signed out!'));
+            auth().signOut();
           },
         },
       ],
@@ -78,31 +77,32 @@ const Weeks = () => {
     );
 
   return (
-    <View style={styles.containerWeeks}>
+    <View style={styles.container}>
       <View style={styles.profileHeader}>
-        <View style={styles.NombreAvatar}>
+        <View style={styles.avatarName}>
           <Image style={styles.imgProfile} source={Avatars[avatar - 1]} />
           <Text style={styles.ProfileName}>{name}</Text>
         </View>
         <TouchableHighlight
           underlayColor="transparent"
           onPress={() => LogOut()}>
-          <Ionicons name="sign-out" size={35} color="#C34F37" />
+          <Icons name="sign-out" size={35} color="#C34F37" />
         </TouchableHighlight>
       </View>
-      {cargando ? (
-        <Text>Preuba</Text>
+
+      {loadig ? (
+        <ActivityIndicator size="large" color="#32CF5E" />
       ) : (
         <ScrollView style={styles.scroll}>
           {tweets.map((tweet) => (
-            <Tweet data={tweet} vista="home" />
+            <Tweet data={tweet} vista={true} />
           ))}
         </ScrollView>
       )}
 
       <View style={styles.refresh}>
         <TouchableHighlight underlayColor="transparent" onPress={DatosToken}>
-          <Ionicons name="refresh" size={30} color="black" />
+          <Icons name="refresh" size={30} color="black" />
         </TouchableHighlight>
       </View>
     </View>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import {
   ActivityIndicator,
-  Alert,
   Text,
   View,
   TouchableHighlight,
@@ -40,27 +39,28 @@ const NuevoTweet = () => {
 
     const token = firebase.auth().currentUser;
 
-    firestore()
+    await firestore()
       .collection('tweets')
       .add({
         fecha: firebase.firestore.FieldValue.serverTimestamp(),
         id: token.uid,
         texto: tweet,
       })
-      .then(() => {
-        limpiar();
-        setCargando(false);
-      });
+      .then(() => limpiar());
+
+    setCargando(false);
   };
 
   return (
     <View style={styles.container}>
       <Text style={styles.text_Header}>Nuevo Tweet</Text>
+
       {errorTweet ? (
         <Text style={styles.textError}>
           Te queremos, no nos dejes en blanco...
         </Text>
       ) : null}
+
       <TextInput
         style={styles.text_area}
         placeholder="Escriba su experiencia!"
@@ -69,25 +69,26 @@ const NuevoTweet = () => {
         multiline={true}
         numberOfLines={7}
       />
-      <Text style={styles.caracteres}>
+      <Text style={styles.characteres}>
         {cantCaracteres}/{LIMIT}
       </Text>
+
       {!cargando ? (
         <>
           <View style={styles.contenedorBotonNuevo}>
             <TouchableHighlight
               underlayColor="#32CF5E"
-              style={styles.buttonRegistro}
+              style={styles.buttonNuevo}
               onPress={Validacion}>
-              <Text style={styles.textbuttonRegistro}>Finalizar</Text>
+              <Text style={styles.textButton}>Finalizar</Text>
             </TouchableHighlight>
           </View>
           <View style={styles.contenedorBotonBorrar}>
             <TouchableHighlight
-              underlayColor="#32CF5E"
+              underlayColor="#C65656"
               style={styles.buttonLimpiar}
               onPress={limpiar}>
-              <Text style={styles.textbuttonRegistro}>Limpiar</Text>
+              <Text style={styles.textButton}>Limpiar</Text>
             </TouchableHighlight>
           </View>
         </>

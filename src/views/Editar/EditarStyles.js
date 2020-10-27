@@ -7,13 +7,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  bottonContainer: {
-    height: 50,
-    width: '100%',
-    borderRadius: 5,
-    marginBottom: 15,
-    marginTop: 5,
-  },
   botton: {
     height: '100%',
     width: '100%',
@@ -23,10 +16,6 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     padding: 10,
   },
-  buttonText: {
-    fontWeight: 'bold',
-    color: 'white',
-  },
   text_Header: {
     fontSize: 40,
     fontWeight: 'bold',
@@ -35,14 +24,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginBottom: 25,
   },
-  contenedorBotonRegistro: {
+  buttonContainer: {
     height: 50,
     width: '100%',
     borderRadius: 5,
     marginBottom: 15,
     marginTop: 5,
   },
-  buttonRegistro: {
+  button: {
     height: '100%',
     width: '100%',
     alignItems: 'center',
@@ -52,7 +41,7 @@ const styles = StyleSheet.create({
     padding: 10,
     borderWidth: 2,
   },
-  textbuttonRegistro: {
+  textbutton: {
     fontWeight: 'bold',
     color: 'black',
   },

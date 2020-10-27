@@ -51,6 +51,13 @@ const Editar = ({ route, navigation }) => {
     [navigation],
   );
 
+  const handleChanges = (e) => {
+    if (cantCaracteres < LIMIT - 1) {
+      setDescripcion(e);
+      setCantidadCaracteres(e.length);
+    }
+  };
+
   const cargar = () => {
     const token = firebase.auth().currentUser;
 
@@ -100,30 +107,28 @@ const Editar = ({ route, navigation }) => {
         style={styles.text_area}
         placeholder="Comentanos que eres..."
         value={descripcion}
-        onChangeText={(text) => {
-          if (cantCaracteres < LIMIT - 1) {
-            setDescripcion(text);
-            setCantidadCaracteres(text.length);
-          }
-        }}
+        onChangeText={handleChanges}
         multiline={true}
         numberOfLines={7}
       />
-      <Text style={styles.caracteres}>{cantCaracteres}/255</Text>
+      <Text style={styles.caracteres}>
+        {cantCaracteres}/{LIMIT}
+      </Text>
+
       {!cargando ? (
         <>
-          <View style={styles.contenedorBotonRegistro}>
+          <View style={styles.buttonContainer}>
             <TouchableHighlight
               underlayColor="#32CF5E"
               onPress={Validacion}
-              style={styles.buttonRegistro}>
-              <Text style={styles.textbuttonRegistro}>Actualizar</Text>
+              style={styles.button}>
+              <Text style={styles.textbutton}>Actualizar</Text>
             </TouchableHighlight>
           </View>
           <TouchableHighlight
             underlayColor="rgba(0,0,0,0.0)"
             onPress={() => navigation.goBack()}>
-            <Text style={styles.iniciarLink}>Cancelar</Text>
+            <Text>Cancelar</Text>
           </TouchableHighlight>
         </>
       ) : (
