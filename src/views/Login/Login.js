@@ -24,7 +24,7 @@ const Login = ({ navigation }) => {
   const PostData = async () => {
     setLoading(true);
     try {
-      auth().signInWithEmailAndPassword(correo, contrasenia);
+      await auth().signInWithEmailAndPassword(correo, contrasenia);
     } catch (error) {
       Alert.alert(
         'Credenciales erroneas',

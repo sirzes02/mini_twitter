@@ -9,6 +9,7 @@ import Descripcion from './src/views/Descripcion/Descripcion';
 import auth from '@react-native-firebase/auth';
 import Indexador from './src/views/Indexador';
 import Editar from './src/views/Editar/Editar';
+import TweetIndividual from './src/views/TweetIndividual/TweetIndividual';
 
 const App = () => {
   const [initializing, setInitializing] = useState(true);
@@ -74,6 +75,11 @@ const App = () => {
             <Stack.Screen
               name="Edicion"
               component={Editar}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen
+              name="TweetIndividual"
+              component={TweetIndividual}
               options={{ headerShown: false }}
             />
           </>

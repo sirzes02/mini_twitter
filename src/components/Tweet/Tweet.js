@@ -57,7 +57,11 @@ const Tweet = ({ vista, data }) => {
       {!cargando ? (
         <View>
           {vista === 'home' && <Text style={styles.nombre}>{nombre}</Text>}
-          <TouchableHighlight underlayColor="transparent">
+          <TouchableHighlight
+            underlayColor="transparent"
+            onPress={() =>
+              navigation.navigate('TweetIndividual', { data, nombre, avatar })
+            }>
             <LinearGradient
               colors={Colors[Math.floor(Math.random() * Math.floor(4))]}
               start={{ x: 0, y: 0 }}

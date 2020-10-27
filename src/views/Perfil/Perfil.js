@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
+  ActivityIndicator,
   Image,
   ScrollView,
   Text,
@@ -40,7 +41,7 @@ const Perfil = ({ navigation }) => {
 
   const DatosToken = async () => {
     setTweets([]);
-    setCargando(false);
+    setCargando(true);
 
     const token = firebase.auth().currentUser;
 
@@ -54,7 +55,7 @@ const Perfil = ({ navigation }) => {
     setAvatar(user._data.avatar);
     setName(user._data.nombre);
     setDescription(user._data.descripcion);
-    setTweets(aux.docs.reverse());
+    setTweets(aux.docs);
   };
 
   return (
@@ -82,16 +83,22 @@ const Perfil = ({ navigation }) => {
           </TouchableHighlight>
         </View>
         <Text style={styles.sub}>Tus Tweets</Text>
-        {tweets.length > 0 ? (
-          <ScrollView style={styles.scroll}>
-            {tweets.map((tweet) => (
-              <Tweet data={tweet} vista="perfil" />
-            ))}
-          </ScrollView>
+        {!cargando ? (
+          <>
+            {tweets.length > 0 ? (
+              <ScrollView style={styles.scroll}>
+                {tweets.map((tweet) => (
+                  <Tweet data={tweet} vista="perfil" />
+                ))}
+              </ScrollView>
+            ) : (
+              <View style={styles.vacio}>
+                <Text>Vacio... Ve a twittear</Text>
+              </View>
+            )}
+          </>
         ) : (
-          <View style={styles.vacio}>
-            <Text>Vacio... Ve a twittear</Text>
-          </View>
+          <ActivityIndicator size="large" color="#32CF5E" />
         )}
       </View>
       <View style={styles.refresh}>

@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     bottom: 0,
     right: 15,
   },
-  scroll: { paddingHorizontal: 13, height: '100%' },
+  scroll: { paddingHorizontal: 13, height: '94%', paddingBottom: 500 },
   refresh: {
     width: 50,
     height: 50,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    bottom: 90,
+    bottom: 70,
     right: 15,
     borderWidth: 2,
   },
