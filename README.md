@@ -30,3 +30,15 @@ Posteriormente se iniciará el AVD (En el caso de Android)
 ```bash
 npm run android
 ```
+
+## Credenciales
+
+La aplicación permite la creación de nuevos usuarios, de igual forma a continuación se citaran 3 diferentes credenciales de usuarios:
+
+- catalina@gmail.com
+- santiago@gmail.com
+- manolo@gmail.com
+
+la contraseña de estos usuarios es: 123456789
+
+De querer ingresar a otras cuentas, debe observar los nombres mostrados en el video y añadir "@gmail.com" al final de los mismos; la contraseña persiste siendo: 123456789.
