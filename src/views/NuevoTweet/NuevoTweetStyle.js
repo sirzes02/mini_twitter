@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     marginBottom: '40%',
   },
   contenedorBotonNuevo: {
-    marginTop: '30%',
+    marginTop: '10%',
     height: 50,
     width: '100%',
     borderRadius: 5,

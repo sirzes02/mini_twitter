@@ -9,6 +9,7 @@ import Avatares from './src/views/Avatares/Avatares';
 import Descripcion from './src/views/Descripcion/Descripcion';
 import Home from './src/views/Home/Home';
 import NuevoTweet from './src/views/NuevoTweet/NuevoTweet';
+import Perfil from './src/views/Perfil/Perfil';
 import auth from '@react-native-firebase/auth';
 import Ionicons from 'react-native-vector-icons/FontAwesome';
 
@@ -69,7 +70,7 @@ const App = () => {
           }}>
           <Tab.Screen
             name="Perfil"
-            component={Home}
+            component={Perfil}
             options={{
               tabBarLabel: 'Perfil',
               tabBarIcon: ({ color }) => (

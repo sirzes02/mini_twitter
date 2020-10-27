@@ -11,7 +11,7 @@ import LinearGradient from 'react-native-linear-gradient';
 import firestore from '@react-native-firebase/firestore';
 import styles from './TweetStyle';
 
-const Tweet = ({ numeroSemana, data }) => {
+const Tweet = ({ vista, data }) => {
   const [cargando, setCargando] = useState(true);
   const [nombre, setNombre] = useState('');
   const [avatar, setAvatar] = useState('');
@@ -56,22 +56,22 @@ const Tweet = ({ numeroSemana, data }) => {
     <View style={styles.container}>
       {!cargando ? (
         <View>
-          <Text style={styles.nombre}>{nombre}</Text>
-          <TouchableHighlight
-            underlayColor="transparent"
-            onPress={() =>
-              navigation.navigate('PreguntasSemana', { semana: numeroSemana })
-            }>
+          {vista === 'home' && <Text style={styles.nombre}>{nombre}</Text>}
+          <TouchableHighlight underlayColor="transparent">
             <LinearGradient
               colors={Colors[Math.floor(Math.random() * Math.floor(4))]}
               start={{ x: 0, y: 0 }}
               end={{ x: 0.9, y: 0.9 }}
               style={styles.semana}>
-              <Image style={styles.imgProfile} source={Avatars[avatar - 1]} />
+              {vista === 'home' && (
+                <Image style={styles.imgProfile} source={Avatars[avatar - 1]} />
+              )}
               <Text style={styles.tituloSemana}> {data._data.texto}</Text>
             </LinearGradient>
           </TouchableHighlight>
-          <Text style={styles.fecha}>{data._data.fecha}</Text>
+          <Text style={vista === 'perfil' ? styles.fecha2 : styles.fecha}>
+            {data._data.fecha}
+          </Text>
         </View>
       ) : (
         <ActivityIndicator size="large" color="#32CF5E" />

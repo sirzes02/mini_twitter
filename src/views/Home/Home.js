@@ -33,7 +33,6 @@ const Weeks = () => {
 
   useEffect(() => {
     DatosToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -92,16 +91,14 @@ const Weeks = () => {
       ) : (
         <ScrollView style={styles.scroll}>
           {tweets.map((tweet) => (
-            <Tweet numeroSemana={4} data={tweet} />
+            <Tweet data={tweet} vista="home" />
           ))}
         </ScrollView>
       )}
-      <View style={styles.contenedorBotonRegistro}>
-        <TouchableHighlight
-          underlayColor="transparent"
-          onPress={DatosToken}
-          style={styles.buttonRegistro}>
-          <Text>Actualizar</Text>
+
+      <View style={styles.refresh}>
+        <TouchableHighlight underlayColor="transparent" onPress={DatosToken}>
+          <Ionicons name="refresh" size={30} color="black" />
         </TouchableHighlight>
       </View>
     </View>
