@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "150877022244",
+    "firebase_url": "https://mini-twitter-79949.firebaseio.com",
+    "project_id": "mini-twitter-79949",
+    "storage_bucket": "mini-twitter-79949.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:150877022244:android:0f4e44609b4a5ac1fc90b1",
+        "android_client_info": {
+          "package_name": "com.mini_twitter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "150877022244-fdcabpc28903ka4828qcnidvaln6rqho.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDD6aHf6C8ww13-9GJsM_RMzBWfYrn4v_U"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "150877022244-fdcabpc28903ka4828qcnidvaln6rqho.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
