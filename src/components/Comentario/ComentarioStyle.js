@@ -20,7 +20,6 @@ const styles = StyleSheet.create({
   },
   tituloSemana: {
     fontSize: 15,
-    color: 'white',
     flex: 4,
   },
   nombre: { marginBottom: 5 },

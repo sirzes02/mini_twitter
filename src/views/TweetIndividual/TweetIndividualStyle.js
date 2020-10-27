@@ -10,9 +10,11 @@ const styles = StyleSheet.create({
     display: 'flex',
     marginBottom: 10,
     flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   img: { width: 50, height: 70, marginBottom: 10 },
-  name: { marginLeft: 20, fontSize: 20 },
+  name: { fontSize: 20 },
   ComentText: { marginTop: 30 },
   text_area: { backgroundColor: '#E7E7E7', borderRadius: 10, width: '100%' },
   buttonContainer: {
@@ -56,8 +58,7 @@ const styles = StyleSheet.create({
   },
   scrollContainer: {
     marginTop: 30,
-    height: '50%',
-    marginBottom: 30,
+    height: '60%',
     paddingHorizontal: 13,
   },
   espaciado: { marginTop: 15 },

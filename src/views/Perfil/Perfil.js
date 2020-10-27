@@ -82,6 +82,7 @@ const Perfil = ({ navigation }) => {
             />
           </TouchableHighlight>
         </View>
+        <View style={styles.lineUp} />
         <Text style={styles.sub}>Tus Tweets</Text>
 
         {!cargando ? (

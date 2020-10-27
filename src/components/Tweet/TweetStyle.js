@@ -2,25 +2,27 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
   semana: {
+    display: 'flex',
+    marginBottom: 10,
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
     minHeight: 50,
     borderRadius: 7,
-    flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 2,
-    paddingVertical: 5,
   },
   imgProfile: {
     width: 20,
     height: 50,
     backgroundColor: '#6A6A6A',
-    borderRadius: 100,
+    borderRadius: 20,
     margin: 15,
     flex: 1,
     borderWidth: 2,
   },
   tituloSemana: {
     fontSize: 15,
-    color: 'white',
+    color: 'black',
     flex: 4,
   },
   container: { marginTop: 0, marginBottom: 0 },

@@ -27,6 +27,7 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
   },
+
   scroll: { paddingHorizontal: 13, height: '94%', paddingBottom: 500 },
   refresh: {
     width: 50,

@@ -13,6 +13,7 @@ import firebase from '@react-native-firebase/app';
 import Tweet from '../../components/Tweet/Tweet';
 import Comentario from '../../components/Comentario/Comentario';
 import styles from './TweetIndividualStyle';
+import Ionicons from 'react-native-vector-icons/FontAwesome';
 
 const TweetIndividual = ({ route }) => {
   const [loading, setLoading] = useState(true);
@@ -21,6 +22,7 @@ const TweetIndividual = ({ route }) => {
   const [comentarios, setComentarios] = useState([]);
   const [comentario, setComentario] = useState('');
   const [id, setId] = useState('');
+  const [like, setLike] = useState(false);
 
   const Avatars = [
     require('../../assets/avatars/a1.png'),
@@ -69,6 +71,11 @@ const TweetIndividual = ({ route }) => {
       <View style={styles.header}>
         <Image style={styles.img} source={Avatars[avatar - 1]} />
         <Text style={styles.name}>{nombre}</Text>
+        <TouchableHighlight
+          onPress={() => setLike(!like)}
+          underlayColor="transparent">
+          <Ionicons name="heart" color={like ? 'red' : 'black'} size={26} />
+        </TouchableHighlight>
       </View>
       <Tweet data={route.params.data} />
       <Text style={styles.ComentText}>Publica un comentario</Text>
@@ -95,7 +102,7 @@ const TweetIndividual = ({ route }) => {
         {comentarios.map((comentario) => (
           <Comentario data={comentario} />
         ))}
-        <View style={styles.espaciado}></View>
+        <View style={styles.espaciado} />
       </ScrollView>
     </View>
   );
