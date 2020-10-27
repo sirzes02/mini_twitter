@@ -25,7 +25,7 @@ npm i
 ```bash
 Yarn
 ```
-Posteriormente se iniciará el ADV (En el caso de Android)
+Posteriormente se iniciará el AVD (En el caso de Android)
 
 ```bash
 npm run android
