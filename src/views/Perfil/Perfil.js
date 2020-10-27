@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { Image, Text, TouchableHighlight, View } from 'react-native';
+import {
+  Image,
+  ScrollView,
+  Text,
+  TouchableHighlight,
+  View,
+} from 'react-native';
 import Ionicons from 'react-native-vector-icons/FontAwesome';
 import firestore from '@react-native-firebase/firestore';
 import firebase from '@react-native-firebase/app';
 import styles from './PerfilStyle';
 import Tweet from '../../components/Tweet/Tweet';
-import { ScrollView } from 'react-native-gesture-handler';
 
-const Perfil = () => {
+const Perfil = ({ navigation }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [avatar, setAvatar] = useState(0);
@@ -16,7 +21,6 @@ const Perfil = () => {
 
   useEffect(() => {
     DatosToken();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {
@@ -54,7 +58,7 @@ const Perfil = () => {
   };
 
   return (
-    <View style={{ display: 'flex', flex: 1 }}>
+    <View style={styles.bigContainer}>
       <View style={styles.contenedor}>
         <View style={styles.containerUp}>
           <Image style={styles.img} source={Avatars[avatar - 1]} />
@@ -68,10 +72,11 @@ const Perfil = () => {
               name="edit"
               size={35}
               color="#F9DD7C"
+              onPress={() => navigation.navigate('Edicion')}
             />
           </TouchableHighlight>
         </View>
-        <Text style={{ marginTop: 20 }}>Tus Tweets</Text>
+        <Text style={styles.sub}>Tus Tweets</Text>
         {tweets.length > 0 ? (
           <ScrollView style={styles.scroll}>
             {tweets.map((tweet) => (
@@ -79,14 +84,7 @@ const Perfil = () => {
             ))}
           </ScrollView>
         ) : (
-          <View
-            style={{
-              alignItems: 'center',
-              marginTop: 100,
-              borderWidth: 2,
-              padding: 30,
-              borderRadius: 10,
-            }}>
+          <View style={styles.vacio}>
             <Text>Vacio... Ve a twittear</Text>
           </View>
         )}

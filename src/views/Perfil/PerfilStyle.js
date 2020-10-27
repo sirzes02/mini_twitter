@@ -39,6 +39,15 @@ const styles = StyleSheet.create({
     right: 15,
     borderWidth: 2,
   },
+  vacio: {
+    alignItems: 'center',
+    marginTop: 100,
+    borderWidth: 2,
+    padding: 30,
+    borderRadius: 10,
+  },
+  sub: { marginTop: 20 },
+  bigContainer: { display: 'flex', flex: 1 },
 });
 
 export default styles;
