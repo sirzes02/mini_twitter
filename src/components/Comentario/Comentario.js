@@ -6,19 +6,16 @@ import {
   ActivityIndicator,
   Image,
 } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
 import LinearGradient from 'react-native-linear-gradient';
 import firestore from '@react-native-firebase/firestore';
-import styles from './TweetStyle';
+import styles from './ComentarioStyle';
 
-const Tweet = ({ vista, data }) => {
+const Tweet = ({ data }) => {
   const [cargando, setCargando] = useState(true);
   const [nombre, setNombre] = useState('');
-  const [avatar, setAvatar] = useState('');
+  const [avatar, setAvatar] = useState(2);
   const [fecha, setFecha] = useState('');
-  const [id, setId] = useState('');
-
-  const navigation = useNavigation();
+  const [comentario, setComentario] = useState();
 
   const Avatars = [
     require('../../assets/avatars/a1.png'),
@@ -45,48 +42,43 @@ const Tweet = ({ vista, data }) => {
 
   useEffect(() => {
     setCargando(false);
-  }, [id]);
+  }, [fecha]);
 
   const DatosToken = async () => {
-    const aux = await firestore().collection('users').doc(data.data().id).get();
+    setComentario(data.data().texto);
+
+    const aux = await firestore()
+      .collection('users')
+      .doc(data.data().id_usu)
+      .get();
 
     setNombre(aux.data().nombre);
     setAvatar(aux.data().avatar);
     setFecha(data.data().fecha.toDate().toLocaleString());
-    setId(data._ref._documentPath._parts[1]);
   };
 
   return (
     <View style={styles.container}>
-      {!cargando ? (
-        <View>
-          {vista && <Text style={styles.nombre}>{nombre}</Text>}
-          <TouchableHighlight
-            underlayColor="transparent"
-            onPress={() =>
-              navigation.navigate('TweetIndividual', {
-                data,
-                nombre,
-                avatar,
-                id,
-              })
-            }>
-            <LinearGradient
-              colors={Colors[Math.floor(Math.random() * Math.floor(4))]}
-              start={{ x: 0, y: 0 }}
-              end={{ x: 0.9, y: 0.9 }}
-              style={styles.semana}>
-              {vista && (
+      <View>
+        {!cargando ? (
+          <>
+            <Text style={styles.nombre}>{nombre}</Text>
+            <TouchableHighlight underlayColor="transparent">
+              <LinearGradient
+                colors={Colors[Math.floor(Math.random() * Math.floor(4))]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 0.9, y: 0.9 }}
+                style={styles.semana}>
                 <Image style={styles.imgProfile} source={Avatars[avatar - 1]} />
-              )}
-              <Text style={styles.tituloSemana}> {data.data().texto}</Text>
-            </LinearGradient>
-          </TouchableHighlight>
-          <Text style={vista ? styles.fecha : styles.fecha2}>{fecha}</Text>
-        </View>
-      ) : (
-        <ActivityIndicator size="large" color="#32CF5E" />
-      )}
+                <Text style={styles.tituloSemana}>{comentario}</Text>
+              </LinearGradient>
+            </TouchableHighlight>
+            <Text style={styles.fecha}>{fecha}</Text>
+          </>
+        ) : (
+          <ActivityIndicator size="large" color="#32CF5E" />
+        )}
+      </View>
     </View>
   );
 };

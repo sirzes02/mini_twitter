@@ -24,69 +24,60 @@ const App = () => {
   useEffect(() => {
     const subscriber = auth().onAuthStateChanged(onAuthStateChanged);
     return subscriber;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   if (initializing) return null;
 
-  return (
-    <NavigationContainer independent={true}>
-      <Stack.Navigator>
-        {!user ? (
-          <>
-            <Stack.Screen
-              name="Home"
-              component={Login}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Register"
-              component={Register}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Avatares"
-              component={Avatares}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Descripcion"
-              component={Descripcion}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Index"
-              component={Indexador}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Prueba"
-              component={Editar}
-              options={{ headerShown: false }}
-            />
-          </>
-        ) : (
-          <>
-            <Stack.Screen
-              name="Index"
-              component={Indexador}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="Edicion"
-              component={Editar}
-              options={{ headerShown: false }}
-            />
-            <Stack.Screen
-              name="TweetIndividual"
-              component={TweetIndividual}
-              options={{ headerShown: false }}
-            />
-          </>
-        )}
-      </Stack.Navigator>
-    </NavigationContainer>
-  );
+  if (!user) {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={Login}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Register"
+            component={Register}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Avatares"
+            component={Avatares}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Descripcion"
+            component={Descripcion}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  } else {
+    return (
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen
+            name="Home"
+            component={Indexador}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="Edicion"
+            component={Editar}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="TweetIndividual"
+            component={TweetIndividual}
+            options={{ headerShown: false }}
+          />
+        </Stack.Navigator>
+      </NavigationContainer>
+    );
+  }
 };
 
 export default App;

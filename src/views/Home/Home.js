@@ -69,7 +69,9 @@ const Weeks = () => {
         {
           text: 'Cerrar sesión',
           onPress: async () => {
-            auth().signOut();
+            auth()
+              .signOut()
+              .then(() => console.log('User signed out!'));
           },
         },
       ],
