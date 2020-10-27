@@ -98,6 +98,7 @@ const Perfil = ({ navigation }) => {
                     key={tweet._ref._documentPath._parts[1]}
                   />
                 ))}
+                <View style={styles.espaciado} />
               </ScrollView>
             ) : (
               <View style={styles.vacio}>

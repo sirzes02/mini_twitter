@@ -79,13 +79,13 @@ const Avatares = ({ navigation }) => {
       .collection('users')
       .doc(token.uid)
       .update({
-        avatar: avatar,
+        avatar,
       })
       .then(() => {
         setEnviado(true);
         navigation.goBack();
+        setCargando(false);
       });
-    setCargando(false);
   };
 
   return (
@@ -171,14 +171,21 @@ const Avatares = ({ navigation }) => {
         </TouchableHighlight>
       </View>
       {!cargando ? (
-        <View style={styles.contenedorBotonRegistro}>
+        <>
+          <View style={styles.contenedorBotonRegistro}>
+            <TouchableHighlight
+              underlayColor="#32CF5E"
+              style={styles.buttonRegistro}
+              onPress={() => ValidarAvatar()}>
+              <Text style={styles.textbuttonRegistro}>Actualizar</Text>
+            </TouchableHighlight>
+          </View>
           <TouchableHighlight
-            underlayColor="#32CF5E"
-            style={styles.buttonRegistro}
-            onPress={() => ValidarAvatar()}>
-            <Text style={styles.textbuttonRegistro}>Actualizar</Text>
+            underlayColor="rgba(0,0,0,0.0)"
+            onPress={() => navigation.goBack()}>
+            <Text>Cancelar</Text>
           </TouchableHighlight>
-        </View>
+        </>
       ) : (
         <ActivityIndicator size="large" color="#32CF5E" />
       )}

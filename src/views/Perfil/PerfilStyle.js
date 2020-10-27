@@ -33,7 +33,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     justifyContent: 'center',
     alignItems: 'center',
-    bottom: 90,
+    bottom: 30,
     right: 15,
     borderWidth: 2,
   },
@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     right: 15,
     left: 15,
   },
+  espaciado: { marginTop: 25 },
 });
 
 export default styles;

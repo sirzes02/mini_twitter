@@ -41,6 +41,7 @@ const styles = StyleSheet.create({
     right: 15,
     borderWidth: 2,
   },
+  espaciado: { marginTop: 10 },
 });
 
 export default styles;
